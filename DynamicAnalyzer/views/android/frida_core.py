@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import glob
 import logging
@@ -84,18 +85,23 @@ class Frida:
         """Function to handle frida responses."""
         if 'payload' in message:
             msg = message['payload']
-            api_mon = 'MobSF-API-Monitor: '
-            aux = '[AUXILIARY] '
-            if not isinstance(msg, str):
-                msg = str(msg)
+            api_mon = b'MobSF-API-Monitor: '
+            aux = b'[AUXILIARY] '
+            if isinstance(msg, str):
+                msg = msg.encode('utf-8', 'ignore')
             if msg.startswith(api_mon):
-                self.write_log(self.api_mon, msg.replace(api_mon, ''))
+                self.write_log(
+                    self.api_mon,
+                    msg.replace(api_mon, b''))
             elif msg.startswith(aux):
-                self.write_log(self.frida_log,
-                               msg.replace(aux, '[*] ') + '\n')
+                self.write_log(
+                    self.frida_log,
+                    msg.replace(aux, b'[*] ') + b'\n')
             else:
-                logger.debug('[Frida] %s', msg)
-                self.write_log(self.frida_log, msg + '\n')
+                logger.debug('[Frida] %s', msg.decode('utf-8', 'ignore'))
+                self.write_log(
+                    self.frida_log,
+                    msg + b'\n')
         else:
             logger.error('[Frida] %s', message)
 
@@ -141,5 +147,5 @@ class Frida:
             os.remove(self.frida_log)
 
     def write_log(self, file_path, data):
-        with open(file_path, 'a') as flip:
+        with open(file_path, 'ab') as flip:
             flip.write(data)
