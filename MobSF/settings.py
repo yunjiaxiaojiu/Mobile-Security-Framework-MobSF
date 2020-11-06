@@ -332,8 +332,8 @@ else:
     EXODUS_URL = 'https://reports.exodus-privacy.eu.org'
     APPMONSTA_URL = 'https://api.appmonsta.com/v1/stores/android/details/'
     ITUNES_URL = 'https://itunes.apple.com/lookup'
-    GITHUB_URL = ('https://raw.githubusercontent.com/'
-                  'MobSF/Mobile-Security-Framework-MobSF/'
+    GITHUB_URL = ('https://github.com/'
+                  'yunjiaxiaojiu/Mobile-Security-Framework-MobSF/edit/'
                   'master/MobSF/settings.py')
     GOOGLE = 'https://www.google.com'
     BAIDU = 'https://www.baidu.com/'
